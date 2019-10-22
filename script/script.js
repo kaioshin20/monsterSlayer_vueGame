@@ -4,7 +4,8 @@ new Vue({
         playerHealth: 100,
         monsterHealth: 100,
         gameIsRunning: false,
-        turns: []
+        turns: [],
+        isPopup: false
     },
     methods: {
         startGame: function(){
@@ -24,6 +25,8 @@ new Vue({
                 return;
             }
             this.monsterAttacks();
+
+            this.flashPopup();
         },
         specialAttack: function(){
             let damage = this.calculateDamage(10, 20);
@@ -36,6 +39,8 @@ new Vue({
                 return;
             }
             this.monsterAttacks();
+
+            this.flashPopup();
         },
         heal: function(){
             if(this.playerHealth <= 90){
@@ -87,6 +92,13 @@ new Vue({
             else{
                 return false;
             }
+        },
+        flashPopup: function(){
+            this.isPopup=true;
+            setInterval(()=>{
+                this.isPopup=false;
+            }, 1000);
+            return;
         }
     }
 });
